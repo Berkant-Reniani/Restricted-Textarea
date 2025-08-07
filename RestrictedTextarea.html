@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restricted Textarea</title>
+</head>
+
+<style>
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0px;
+    }
+
+    .message-box {
+        margin-left: 50px;
+        position: relative;
+        width: min-content;
+        height: min-content;
+    }
+
+    .message-box p {
+        font-size: 25px;
+        padding-left: 5px;
+    }
+
+    textarea {
+        width: 500px;
+        height: 130px;
+        border-width: 2px;
+        border-style: solid;
+        border-color: black;
+        border-radius: 35px;
+        resize: none;
+        font-family: Arial, Helvetica, sans-serif;
+        box-sizing: border-box;
+        padding: 10px 20px;
+        outline: none;
+        font-size: 15px;
+    }
+
+    textarea::placeholder {
+        font-size: 15px;
+        color: rgba(0, 0, 0, 0.3);
+
+    }
+
+    textarea:focus {
+        outline: none;
+    }
+
+    .counter {
+        font-weight: bold;
+        color: black;
+        position: absolute;
+        right: 30px;
+        bottom: 20px;
+    }
+</style>
+
+<body>
+
+    <div id="box" class="message-box">
+        <p>Write your Message</p>
+        <textarea id="textareaid" placeholder="Start typing ..." maxlength="250"></textarea>
+        <div id="counterid" class="counter">0 / 250</div>
+    </div>
+
+    <script>
+
+        const textarea = document.getElementById("textareaid");
+        const counter = document.getElementById("counterid");
+        const maxlength = textarea.maxLength;
+
+        function update() {
+            const currentLength = textarea.value.length;
+            counter.textContent = `${currentLength} / 250`;
+
+            if (currentLength === maxlength) {
+                textarea.style.color = "red";
+                counter.style.color = "red";
+                textarea.style.borderColor = "red";
+
+            } else {
+                textarea.style.color = "black";
+                counter.style.color = "black";
+                textarea.style.borderColor = "black";
+            };
+        };
+
+        textarea.addEventListener("input", update);
+
+    </script>
+</body>
+
+</html>
